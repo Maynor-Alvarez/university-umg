@@ -20,7 +20,7 @@ public class BienvenidaProfesor extends javax.swing.JFrame {
     public BienvenidaProfesor() {
         initComponents();
         
-         jLabel1.setText("Bienvido profesor: "+LoginA.profesorLogeado.nombre);
+         jLabel1.setText("Bienvenido profesor: "+LoginA.profesorLogeado.nombre);
          
     }
 

@@ -23,7 +23,7 @@ public class CrearCurso extends javax.swing.JFrame {
          jComboBox1.setSelectedIndex(-1);
          jTextField4.setText("00:00");
          jTextField5.setText("00:00");
-         jTextField1.setText("C2024.00"+Cursos.contador);
+         jTextField1.setText("3190"+Cursos.contador);
       
     }
 
@@ -300,7 +300,7 @@ public class CrearCurso extends javax.swing.JFrame {
          c.profesor= (String)jComboBox1.getSelectedItem();
          
         LoginA.curso.add(c);
-        jTextField1.setText("C2024.00"+Cursos.contador);
+        jTextField1.setText("3190"+Cursos.contador);
         jTextField2.setText("");
         jTextField3.setText("");  
         jTextField6.setText(""); 

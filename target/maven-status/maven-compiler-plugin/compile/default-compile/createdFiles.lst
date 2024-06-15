@@ -67,6 +67,7 @@ com/mycompany/logina/CrearAlumno$4.class
 com/mycompany/logina/CrearProfesor$4.class
 com/mycompany/logina/CrearProfesor.class
 com/mycompany/logina/BienvenidaAlumno$3.class
+com/mycompany/logina/ConsultaAsigCursoAlum$3.class
 com/mycompany/logina/AlumAsigCurso$3.class
 com/mycompany/logina/ModificarAlumno$3.class
 com/mycompany/logina/AlumnoModi$2.class
@@ -103,4 +104,5 @@ com/mycompany/logina/CrearCurso$8.class
 com/mycompany/logina/VerAlumProf.class
 com/mycompany/logina/CrearCurso$1.class
 com/mycompany/logina/ModificarProfesor$3.class
+com/mycompany/logina/AsignarEstudianteaCurso$5.class
 com/mycompany/logina/BienvenidaProfesor$4.class

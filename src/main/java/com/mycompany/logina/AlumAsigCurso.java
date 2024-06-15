@@ -124,8 +124,13 @@ public class AlumAsigCurso extends javax.swing.JFrame {
 
         for(Cursos e : LoginA.curso){
             if(e.id.equals(jComboBox1.getSelectedItem().toString())){
+                if (e.Alumnos.size() == 10) {
+                    JOptionPane.showMessageDialog(this, "Curso no disponible");
+                    break;
+                } else {
                 CursoSeleccionado = e;
                 break;
+                }
             }
         }
             

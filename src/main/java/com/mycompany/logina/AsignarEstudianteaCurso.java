@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.logina;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,15 +16,17 @@ import javax.swing.JOptionPane;
  */
 public class AsignarEstudianteaCurso extends javax.swing.JFrame {
 
+    Cursos Cursoseleccionado;
+
     /**
      * Creates new form AsignarEstudianteaCurso
      */
     public AsignarEstudianteaCurso() {
         initComponents();
-        for(Cursos c : LoginA.curso){
+        for (Cursos c : LoginA.curso) {
             jComboBox1.addItem(c.id);
         }
-        for(Alumno a: LoginA.alumnos){
+        for (Alumno a : LoginA.alumnos) {
             jComboBox2.addItem(a.carne);
         }
         jComboBox1.setSelectedIndex(-1);
@@ -47,6 +54,7 @@ public class AsignarEstudianteaCurso extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,6 +93,13 @@ public class AsignarEstudianteaCurso extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/teacher_man_user_avatar_school_icon_209258.png"))); // NOI18N
 
+        jButton6.setText("Carga Masiva");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,25 +108,31 @@ public class AsignarEstudianteaCurso extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3))
+                        .addComponent(jLabel3)
+                        .addGap(48, 48, 48))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton2)
+                                        .addGap(25, 25, 25)
+                                        .addComponent(jButton6))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(21, 21, 21)
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(71, 71, 71))
+                .addGap(23, 23, 23))
             .addGroup(layout.createSequentialGroup()
                 .addGap(133, 133, 133)
                 .addComponent(jLabel4)
@@ -139,7 +160,8 @@ public class AsignarEstudianteaCurso extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton6))
                 .addGap(26, 26, 26))
         );
 
@@ -152,7 +174,7 @@ public class AsignarEstudianteaCurso extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    Administrador a = new Administrador();
+        Administrador a = new Administrador();
         a.setVisible(true);
         this.dispose();         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -160,38 +182,103 @@ public class AsignarEstudianteaCurso extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Cursos CursoSeleccionado = null;
         Alumno AlumnosSeleccionados = null;
-        
-       for(Cursos e : LoginA.curso){
-           if(e.id.equals(jComboBox1.getSelectedItem().toString())){
-                CursoSeleccionado = e;
-                break;
+
+        for (Cursos e : LoginA.curso) {
+            if (e.id.equals(jComboBox1.getSelectedItem().toString())) {
+                if (e.Alumnos.size() == 10) {
+                    JOptionPane.showMessageDialog(this, "Curso no disponible");
+                    break;
+                } else {
+                    this.Cursoseleccionado = e;
+                    CursoSeleccionado = e;
+                    break;
+                }
             }
         }
-        for(Alumno a: LoginA.alumnos){
-           if(a.carne.equals(jComboBox2.getSelectedItem().toString())){
+
+        for (Alumno a : LoginA.alumnos) {
+            if (a.carne.equals(jComboBox2.getSelectedItem().toString())) {
                 AlumnosSeleccionados = a;
                 break;
             }
-        }    
-        if(AlumnosSeleccionados!=null && CursoSeleccionado!=null){
-           Alumno a= new Alumno();
-           
-           a.nombre = AlumnosSeleccionados.nombre;
-           a.apellido = AlumnosSeleccionados.apellido;
-           a.carne = AlumnosSeleccionados.carne;
-           a.nota = AlumnosSeleccionados.nota;
-           
-           CursoSeleccionado.Alumnos.add(a);
+        }
+        if (AlumnosSeleccionados != null && CursoSeleccionado != null) {
+            Alumno a = new Alumno();
+
+            a.nombre = AlumnosSeleccionados.nombre;
+            a.apellido = AlumnosSeleccionados.apellido;
+            a.carne = AlumnosSeleccionados.carne;
+            a.nota = AlumnosSeleccionados.nota;
+
+            CursoSeleccionado.Alumnos.add(a);
             JOptionPane.showMessageDialog(this, "Alumno asignados exitosamente.");
         }
-          jComboBox1.setSelectedIndex(-1); jComboBox2.setSelectedIndex(-1);
+        jComboBox1.setSelectedIndex(-1);
+        jComboBox2.setSelectedIndex(-1);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
-   
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser archivo = new JFileChooser();
+        int retorno = archivo.showDialog(this, "Cargar");
+        if (retorno == JFileChooser.APPROVE_OPTION) {
+            leerArchivoXMLAlumnos(archivo.getSelectedFile());
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    public void leerArchivoXMLAlumnos(File archivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split("#");
+                Cursos CursoSeleccionado = null;
+                Alumno AlumnosSeleccionados = null;
+
+                for (Cursos e : LoginA.curso) {
+                    if (data[0].equals(jComboBox1.getSelectedItem().toString())) {
+                        if (e.Alumnos.size() == 10) {
+                            JOptionPane.showMessageDialog(this, "Curso no disponible");
+                            break;
+                        } else {
+                            this.Cursoseleccionado = e;
+                            CursoSeleccionado = e;
+                            break;
+                        }
+                    }
+                }
+
+                for (Alumno a : LoginA.alumnos) {
+                    if (data[1].equals(jComboBox2.getSelectedItem().toString())) {
+                        AlumnosSeleccionados = a;
+                        break;
+                    }
+                }
+                if (AlumnosSeleccionados != null && CursoSeleccionado != null) {
+                    Alumno a = new Alumno();
+
+                    a.nombre = AlumnosSeleccionados.nombre;
+                    a.apellido = AlumnosSeleccionados.apellido;
+                    a.carne = AlumnosSeleccionados.carne;
+                    a.nota = AlumnosSeleccionados.nota;
+
+                    CursoSeleccionado.Alumnos.add(a);
+                    JOptionPane.showMessageDialog(this, "Alumno asignados exitosamente.");
+                }
+
+/*                this.Cursoseleccionado.Alumnos.forEach(item -> {
+                    if (!item.carne.equals(a.carne)) {
+                        this.Cursoseleccionado.Alumnos.add(a);
+                    }
+                });*/
+            }
+        } catch (Exception e) {
+
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -200,6 +287,7 @@ public class AsignarEstudianteaCurso extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;

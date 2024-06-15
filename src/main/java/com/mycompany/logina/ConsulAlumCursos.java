@@ -4,7 +4,6 @@
  */
 package com.mycompany.logina;
 
-
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -22,41 +21,47 @@ public class ConsulAlumCursos extends javax.swing.JFrame {
      */
     public ConsulAlumCursos() {
         initComponents();
-        
+
         ActualizarTabla();
         selector();
-        }
-    
-    private void ActualizarTabla(){      
-                      DefaultTableModel data = new DefaultTableModel(new String[]{"ID","Nombre","Seccion","Fecha Inicio","Fecha Fin", "Hora Inicio",
-         "Hora Fin", "Profesor"},LoginA.curso.size());
-        jTable1.setModel(data);
-        
-        int row=0;
-        
-        for(Cursos c : LoginA.curso){
-            
-            for(Alumno a: c.Alumnos){
-                if(a.carne.equals(LoginA.alumnoLogeado.carne)){
-            jTable1.setValueAt(c.id, row, 0);
-            jTable1.setValueAt(c.nombre, row, 1); 
-            jTable1.setValueAt(c.seccion, row, 2);
-            jTable1.setValueAt(c.fechainicio, row, 3);
-            jTable1.setValueAt(c.fechafin, row, 4);
-            jTable1.setValueAt(c.horaInicio, row, 5);
-            jTable1.setValueAt(c.horaFin, row, 6);
-            jTable1.setValueAt(c.profesor, row, 7);
-            row++;
-             }
-            }
-            
-         
-        }
-        
     }
-            
+
+    private void ActualizarTabla() {
+        DefaultTableModel data = new DefaultTableModel(new String[]{"ID", "Nombre", "Seccion", "Fecha Inicio", "Fecha Fin", "Hora Inicio",
+            "Hora Fin", "Profesor", "Nota"}, LoginA.curso.size());
+        jTable1.setModel(data);
+
+        int row = 0;
+        double totalNotas = 0;
+        int contadorNotas = 0;
+
+        for (Cursos c : LoginA.curso) {
+
+            for (Alumno a : c.Alumnos) {
+                if (a.carne.equals(LoginA.alumnoLogeado.carne)) {
+                    jTable1.setValueAt(c.id, row, 0);
+                    jTable1.setValueAt(c.nombre, row, 1);
+                    jTable1.setValueAt(c.seccion, row, 2);
+                    jTable1.setValueAt(c.fechainicio, row, 3);
+                    jTable1.setValueAt(c.fechafin, row, 4);
+                    jTable1.setValueAt(c.horaInicio, row, 5);
+                    jTable1.setValueAt(c.horaFin, row, 6);
+                    jTable1.setValueAt(c.profesor, row, 7);
+                    jTable1.setValueAt(a.nota, row, 8);
+
+                    // Acumular notas y contar
+                    totalNotas += Double.valueOf(a.nota);
+                    contadorNotas++;
+                    row++;
+                }
+            }
+
+        }
         
-   
+        this.promedio.setText("Promedio: " + totalNotas / contadorNotas);
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,6 +74,7 @@ public class ConsulAlumCursos extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        promedio = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,6 +98,8 @@ public class ConsulAlumCursos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        promedio.setText("Promedio:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,10 +107,11 @@ public class ConsulAlumCursos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(promedio)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -111,7 +120,9 @@ public class ConsulAlumCursos extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(promedio))
                 .addContainerGap())
         );
 
@@ -120,16 +131,16 @@ public class ConsulAlumCursos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     private void selector() {
         JMenuItem Desasignar = new JMenuItem("Desasignar");
-     Desasignar.addActionListener((ActionEvent e) -> {
-        Cursos cursoSeleccionado = LoginA.curso.get(jTable1.getSelectedRow()); // Obtén el curso seleccionado
-        cursoSeleccionado.Alumnos.remove(LoginA.alumnoLogeado); // Elimina al alumno de la lista de alumnos del curso seleccionado
-        ActualizarTabla();
-        JOptionPane.showMessageDialog(this, "Desasignación exitosa.");
+        Desasignar.addActionListener((ActionEvent e) -> {
+            Cursos cursoSeleccionado = LoginA.curso.get(jTable1.getSelectedRow()); // Obtén el curso seleccionado
+            cursoSeleccionado.Alumnos.remove(LoginA.alumnoLogeado); // Elimina al alumno de la lista de alumnos del curso seleccionado
+            ActualizarTabla();
+            JOptionPane.showMessageDialog(this, "Desasignación exitosa.");
         });
 
-    jTable1.setComponentPopupMenu(new JPopupMenu());
-    jTable1.getComponentPopupMenu().add(Desasignar);
-}
+        jTable1.setComponentPopupMenu(new JPopupMenu());
+        jTable1.getComponentPopupMenu().add(Desasignar);
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         BienvenidaAlumno a = new BienvenidaAlumno();
         a.setVisible(true);
@@ -141,5 +152,6 @@ public class ConsulAlumCursos extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel promedio;
     // End of variables declaration//GEN-END:variables
 }

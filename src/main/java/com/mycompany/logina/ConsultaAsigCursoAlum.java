@@ -4,23 +4,35 @@
  */
 package com.mycompany.logina;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  *
  * @author maynor
  */
 public class ConsultaAsigCursoAlum extends javax.swing.JFrame {
+    
+    Cursos Cursoseleccionado;
 
     /**
      * Creates new form ConsultaAsigCursoAlum
      */
     public ConsultaAsigCursoAlum() {
         initComponents();
-            for(Cursos c : LoginA.curso){
+        for (Cursos c : LoginA.curso) {
             jComboBox1.addItem(c.id);
         }
-        DefaultTableModel data = new DefaultTableModel(new String[]{"Carnet Alunmo", "Nombre Alumno","Apellido Alumno"},LoginA.alumnos.size());
+        DefaultTableModel data = new DefaultTableModel(new String[]{"Carnet Alunmo", "Nombre Alumno", "Apellido Alumno"}, LoginA.alumnos.size());
         jTable1.setModel(data);
     }
 
@@ -39,6 +51,7 @@ public class ConsultaAsigCursoAlum extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +84,13 @@ public class ConsultaAsigCursoAlum extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton6.setText("Carga Masiva");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,7 +103,8 @@ public class ConsultaAsigCursoAlum extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton6))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -104,7 +125,9 @@ public class ConsultaAsigCursoAlum extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton6))
                 .addGap(16, 16, 16))
         );
 
@@ -114,45 +137,79 @@ public class ConsultaAsigCursoAlum extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        Cursos Cursoseleccionado = null;
-        
-        for(Cursos a : LoginA.curso){
-            if(a.id.equals(jComboBox1.getSelectedItem().toString())){
-                Cursoseleccionado = a;
+        for (Cursos a : LoginA.curso) {
+            if (a.id.equals(jComboBox1.getSelectedItem().toString())) {
+                this.Cursoseleccionado = a;
                 break;
             }
         }
-        
-        if(Cursoseleccionado!=null){
-            
-         DefaultTableModel data = new DefaultTableModel(new String[]{"Carnet Alunmo", "Nombre Alumno","Apellido Alumno"},Cursoseleccionado.Alumnos.size());
-        jTable1.setModel(data);
-        
-        int row=0;
-        
-        for(Alumno a : Cursoseleccionado.Alumnos){
-            jTable1.setValueAt(a.carne, row, 0);
-            jTable1.setValueAt(a.nombre, row, 1);  
-            jTable1.setValueAt(a.apellido, row, 2);  
-            row++;
-        }
-            
+
+        if (this.Cursoseleccionado != null) {
+            ActualizarTabla();
         }
 
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void ActualizarTabla() {
+
+        DefaultTableModel data = new DefaultTableModel(new String[]{"Carnet Alunmo", "Nombre Alumno", "Apellido Alumno"}, this.Cursoseleccionado.Alumnos.size());
+        jTable1.setModel(data);
+
+        int row = 0;
+
+        for (Alumno a : this.Cursoseleccionado.Alumnos) {
+            jTable1.setValueAt(a.carne, row, 0);
+            jTable1.setValueAt(a.nombre, row, 1);
+            jTable1.setValueAt(a.apellido, row, 2);
+            row++;
+        }
+
+    }
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         Administrador a = new Administrador();
+        Administrador a = new Administrador();
         a.setVisible(true);
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-   
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser archivo = new JFileChooser();
+        int retorno = archivo.showDialog(this, "Cargar");
+        if (retorno == JFileChooser.APPROVE_OPTION) {
+            leerArchivoXMLAlumnos(archivo.getSelectedFile());
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    public void leerArchivoXMLAlumnos(File archivo) {
+            try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    String[] data = line.split("#");
+                    Alumno a = new Alumno();
+                    a.carne = data[0];
+                    a.nombre = data[1];
+                    a.apellido = data[2];
+                    
+                    this.Cursoseleccionado.Alumnos.forEach(item -> {
+                        if (!item.carne.equals(a.carne)) {
+                            this.Cursoseleccionado.Alumnos.add(a);
+                        }
+                    });
+                }
+                
+                ActualizarTabla();
+            } catch (Exception e) {
+
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
