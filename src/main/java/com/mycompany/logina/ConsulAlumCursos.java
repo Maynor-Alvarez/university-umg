@@ -27,7 +27,7 @@ public class ConsulAlumCursos extends javax.swing.JFrame {
     }
 
     private void ActualizarTabla() {
-        DefaultTableModel data = new DefaultTableModel(new String[]{"ID", "Nombre", "Seccion", "Fecha Inicio", "Fecha Fin", "Hora Inicio",
+        DefaultTableModel data = new DefaultTableModel(new String[]{"ID", "Nombre", "Sección", "Fecha Inicio", "Fecha Fin", "Hora Inicio",
             "Hora Fin", "Profesor", "Nota"}, LoginA.curso.size());
         jTable1.setModel(data);
 
@@ -130,12 +130,12 @@ public class ConsulAlumCursos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void selector() {
-        JMenuItem Desasignar = new JMenuItem("Desasignar");
+        JMenuItem Desasignar = new JMenuItem("Designación");
         Desasignar.addActionListener((ActionEvent e) -> {
             Cursos cursoSeleccionado = LoginA.curso.get(jTable1.getSelectedRow()); // Obtén el curso seleccionado
             cursoSeleccionado.Alumnos.remove(LoginA.alumnoLogeado); // Elimina al alumno de la lista de alumnos del curso seleccionado
             ActualizarTabla();
-            JOptionPane.showMessageDialog(this, "Desasignación exitosa.");
+            JOptionPane.showMessageDialog(this, "Designación exitosa.");
         });
 
         jTable1.setComponentPopupMenu(new JPopupMenu());

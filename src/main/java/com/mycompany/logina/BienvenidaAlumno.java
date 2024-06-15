@@ -15,7 +15,7 @@ public class BienvenidaAlumno extends javax.swing.JFrame {
      */
     public BienvenidaAlumno() {
         initComponents();
-         jLabel1.setText("Bienvido alumno: "+LoginA.alumnoLogeado.nombre);
+         jLabel1.setText("Bienvenido alumno: "+LoginA.alumnoLogeado.nombre);
     }
 
     /**
