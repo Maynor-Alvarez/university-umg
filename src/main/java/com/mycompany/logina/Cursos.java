@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Moises
+ * @author maynor
  */
 public class Cursos {
     public String id;

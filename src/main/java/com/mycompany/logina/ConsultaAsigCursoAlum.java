@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Moises
+ * @author maynor
  */
 public class ConsultaAsigCursoAlum extends javax.swing.JFrame {
 

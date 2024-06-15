@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Moises
+ * @author maynor
  */
 public class ConsulProfCurso extends javax.swing.JFrame {
 

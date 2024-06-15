@@ -8,7 +8,7 @@ import java.text.ParseException;
 import javax.swing.JOptionPane;
 /**
  *
- * @author Moises
+ * @author maynor
  */
 public class ModificarCursos extends javax.swing.JFrame {
 private Cursos CursoModificar;

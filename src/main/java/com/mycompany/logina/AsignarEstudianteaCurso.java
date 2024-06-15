@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Moises
+ * @author maynor
  */
 public class AsignarEstudianteaCurso extends javax.swing.JFrame {
 

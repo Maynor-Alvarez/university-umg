@@ -22,7 +22,7 @@ import org.w3c.dom.NodeList;
 
 /**
  *
- * @author Moises
+ * @author maynor
  */
 public class ConsultaAlumnos extends javax.swing.JFrame {
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author moises
+ * @author maynor
  */
 public class LoginA {
     public static ArrayList<Profesor> profesores = new ArrayList<>();

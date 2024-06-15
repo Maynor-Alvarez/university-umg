@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author moises
+ * @author maynor
  */
 public class CrearProfesor extends javax.swing.JFrame {
 

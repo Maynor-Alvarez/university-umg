@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Moises
+ * @author maynor
  */
 public class ConsultaProfesor extends javax.swing.JFrame {
 

@@ -2,7 +2,7 @@ package com.mycompany.logina;
 import javax.swing.JOptionPane;
 /**
  *
- * @author moises
+ * @author maynor
  */
 public class LoginF extends javax.swing.JFrame {
 

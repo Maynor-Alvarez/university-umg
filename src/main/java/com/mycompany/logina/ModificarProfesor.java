@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Moises
+ * @author maynor
  */
 public class ModificarProfesor extends javax.swing.JFrame {
   private Profesor ProfesorModificar;

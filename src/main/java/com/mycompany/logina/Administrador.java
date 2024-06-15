@@ -8,7 +8,7 @@ package com.mycompany.logina;
 
 /**
  *
- * @author moises
+ * @author maynor
  */
 public class Administrador extends javax.swing.JFrame {
 

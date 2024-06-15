@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author moises
+ * @author maynor
  */
 public class CrearAlumno extends javax.swing.JFrame {
 

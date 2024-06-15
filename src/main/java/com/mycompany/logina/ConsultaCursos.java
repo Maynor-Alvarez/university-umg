@@ -19,7 +19,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 /**
  *
- * @author Moises
+ * @author maynor
  */
 public class ConsultaCursos extends javax.swing.JFrame {
 

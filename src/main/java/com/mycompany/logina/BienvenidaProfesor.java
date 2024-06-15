@@ -10,7 +10,7 @@ package com.mycompany.logina;
 
 /**
  *
- * @author moises
+ * @author maynor
  */
 public class BienvenidaProfesor extends javax.swing.JFrame {
 

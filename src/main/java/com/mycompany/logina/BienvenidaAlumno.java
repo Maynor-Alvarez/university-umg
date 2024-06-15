@@ -6,7 +6,7 @@ package com.mycompany.logina;
 
 /**
  *
- * @author moises
+ * @author maynor
  */
 public class BienvenidaAlumno extends javax.swing.JFrame {
 
